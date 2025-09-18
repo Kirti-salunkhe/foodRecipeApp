@@ -7,6 +7,7 @@ import axios from 'axios'
 import  AddFoodRecipe  from './pages/AddFoodRecipe'
 import EditRecipe from './pages/EditRecipe'
 import RecipeDetails from './pages/RecipeDetails'
+import RecipeItems from './components/RecipeItems'
 
 
 const getAllRecipes=async()=>{
@@ -40,17 +41,18 @@ const getRecipe=async({params})=>{
   return recipe
 }
 
-const router=createBrowserRouter([
-  {path:"/",element:<MainNavigation/>,children:[
-    {path:"/",element:<Home/>,loader:getAllRecipes},
-    {path:"/myRecipe",element:<Home/>,loader:getMyRecipes},
-    {path:"/favRecipe",element:<Home/>,loader:getFavRecipes},
-    {path:"/addRecipe",element:<AddFoodRecipe/>},
-    {path:"/editRecipe/:id",element:<EditRecipe/>},
-    {path:"/recipe/:id",element:<RecipeDetails/>,loader:getRecipe}
+
+
+const router = createBrowserRouter([
+  { path: "/", element: <MainNavigation />, children: [
+    { path: "/", element: <Home />, loader: getAllRecipes },
+    { path: "/myRecipe", element: <RecipeItems />, loader: getMyRecipes },
+    { path: "/favRecipe", element: <RecipeItems />, loader: getFavRecipes },
+    { path: "/addRecipe", element: <AddFoodRecipe /> },
+    { path: "/editRecipe/:id", element: <EditRecipe /> },
+    { path: "/recipe/:id", element: <RecipeDetails />, loader: getRecipe }
   ]}
- 
-])
+]);
 
 export default function App() {
   return (
